@@ -1,0 +1,29 @@
+%h1 Listing favors
+:javascript
+  $(function(){
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(#{raw @hash.to_json});
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    });
+  })
+
+%div{style: 'width: 800px;'}
+  #map{style: 'width: 800px; height: 400px;'}
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @favors.each do |favor|
+    %tr
+      %td= link_to 'Show', favor
+      %td= link_to 'Edit', edit_favor_path(favor)
+      %td= link_to 'Destroy', favor, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Favor', new_favor_path
