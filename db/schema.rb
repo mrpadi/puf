@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 20141111234106) do
   create_table "favors", force: true do |t|
     t.decimal  "latitude",   precision: 10, scale: 6
     t.decimal  "longitude",  precision: 10, scale: 6
+    t.boolean  "seed"
+    t.integer  "origin"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
